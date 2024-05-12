@@ -165,7 +165,7 @@ def main():
     The main function of the Hangman game.
 
     This function runs the Hangman game, where the player tries to guess a secret word by guessing individual letters.
-    The function prompts the player to enter a secret word, and then allows the player to make guesses until they either
+    The function prompts the player to enter a difficulty level and it randomize a word from the specific path, and then allows the player to make guesses until they either
     win by guessing all the letters in the word, or lose by running out of attempts.
 
     Args:
