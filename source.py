@@ -2,6 +2,7 @@ import os
 import random
 
 MAX_TRIES = 6
+#Store the images, based on index access
 HANGMAN_PHOTOS = {
     0: "\nx-------x",
     1: "\nx-------x\n|\n|\n|\n|\n|",
@@ -45,11 +46,11 @@ def show_hidden_word(secret_word, old_letters_guessed):
     """
     hidden_word = ""
     for letter in secret_word:
-        if letter in old_letters_guessed or letter == " ":
+        if letter in old_letters_guessed or letter == " ": # If the letter exist, unblur it, if it a space, show it also
             hidden_word += letter + " "
         else:
-            hidden_word += "_ "
-    return hidden_word.strip()
+            hidden_word += "_ " # If the letter is not exist, blur it.
+    return hidden_word.strip()   # Return the hidden word with correctly guessed letters revealed and other letters replaced with underscores
 
 def check_win(secret_word, old_letters_guessed):
     """
@@ -63,9 +64,9 @@ def check_win(secret_word, old_letters_guessed):
         bool: True if all the letters in the secret_word have been guessed correctly, False otherwise.
     """
     for letter in secret_word:
-        if letter.lower() not in old_letters_guessed and letter != " ":
+        if letter.lower() not in old_letters_guessed and letter != " ": # also check for spaces
             return False
-    return True
+    return True  # Return True if all the letters in the secret_word (excluding spaces) have been guessed correctly, otherwise return False
     
     
 def check_valid_input(letter_guessed, old_letters_guessed):
@@ -80,8 +81,8 @@ def check_valid_input(letter_guessed, old_letters_guessed):
     bool: True if the input letter is a valid guess, False otherwise.
     """
     if len(letter_guessed) != 1 or not letter_guessed.isalpha() or letter_guessed == " " or letter_guessed.lower() in old_letters_guessed:
-        return False
-    return True
+        return False # Return false, if the len is not 1, if it not an ABC letter, or if space has been entered or if the input already been used
+    return True 
 
 def try_update_letter_guessed(letter_guessed, old_letters_guessed):
     """
@@ -116,7 +117,7 @@ def choose_word(file_path, difficulty):
       str: The chosen word.
   """
   with open(file_path, "r") as file:
-      # Read the entire file content
+  # Read the entire file content
       content = file.read()
   # Split the content by the pipe symbol to separate difficulty sections
   difficulty_sections = content.split("|")
@@ -195,7 +196,7 @@ def main():
         if letter_guessed not in SAVED_WORD:
             num_of_tries += 1
         if check_win(SAVED_WORD, old_letters_guessed):
-            print(show_hidden_word(SAVED_WORD, old_letters_guessed))
+            print("\n",show_hidden_word(SAVED_WORD, old_letters_guessed))
             print("You won!")
             break
     # Check if the player has lost
