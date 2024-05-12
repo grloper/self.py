@@ -3,13 +3,13 @@ import random
 
 MAX_TRIES = 6
 HANGMAN_PHOTOS = {
-    0: "x-------x",
-    1: "x-------x\n|\n|\n|\n|\n|",
-    2: "x-------x\n|       |\n|       0\n|\n|\n|",
-    3: "x-------x\n|       |\n|       0\n|       |\n|\n|",
-    4: "x-------x\n|       |\n|       0\n|      /|\\\n|\n|",
-    5: "x-------x\n|       |\n|       0\n|      /|\\\n|      / \n|",
-    6: "x-------x\n|       |\n|       0\n|      /|\\\n|      / \\"
+    0: "\nx-------x",
+    1: "\nx-------x\n|\n|\n|\n|\n|",
+    2: "\nx-------x\n|       |\n|       0\n|\n|\n|",
+    3: "\nx-------x\n|       |\n|       0\n|       |\n|\n|",
+    4: "\nx-------x\n|       |\n|       0\n|      /|\\\n|\n|",
+    5: "\nx-------x\n|       |\n|       0\n|      /|\\\n|      / \n|",
+    6: "\nx-------x\n|       |\n|       0\n|      /|\\\n|      / \\"
 }
 #r is used to indicate that the string is a raw string
 HANGMAN_GAME_LOGO = r"""
@@ -162,11 +162,7 @@ def print_welcome_screen():
      
 def main():
     """
-    The main function of the Hangman game.
-
-    This function runs the Hangman game, where the player tries to guess a secret word by guessing individual letters.
-    The function prompts the player to enter a difficulty level and it randomize a word from the specific path, and then allows the player to make guesses until they either
-    win by guessing all the letters in the word, or lose by running out of attempts.
+    The main function of the Hangman game
 
     Args:
         None
@@ -179,7 +175,7 @@ def main():
     num_of_tries = 0
     
     # Handle the input of the secret word and the difficulty level
-    path = input("Enter file path: ")
+    path = input("\nEnter file path: ")
     while not os.path.isfile(path):
         path = input("Invalid file path. Please enter a valid file path: ")
         
