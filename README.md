@@ -22,7 +22,8 @@ Run the game using the following command:
         python source.py
 
 
-    Choose Difficulty:
+Choose Difficulty:
+
         The game will prompt you to enter the file path for words.txt. Ensure the path is correct.
         Select a difficulty level (1: Easy, 2: Medium, 3: Hard).
 
