@@ -51,3 +51,7 @@ This file defines three difficulty levels: Easy, Medium, and Hard, with correspo
 Have Fun!
 
 This Hangman game is a fun and challenging way to test your vocabulary and word guessing skills. Enjoy playing!
+
+
+![image](https://github.com/grloper/self.py/assets/72247422/93a9e7b1-dca4-4ba4-a996-f06f8a0024f1)
+
