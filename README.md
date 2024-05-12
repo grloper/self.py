@@ -16,12 +16,11 @@ How to Play:
 
         Open a terminal or command prompt and navigate to the directory containing the files.
 
-        Run the game using the following command:
-        Bash
-
+Run the game using the following command:
+         Bash
+         
         python source.py
 
-        חשוב להשתמש בקוד בזהירות.
 
     Choose Difficulty:
         The game will prompt you to enter the file path for words.txt. Ensure the path is correct.
