@@ -1,4 +1,4 @@
-#Hangman Game
+# Hangman Game
 
 This is a classic Hangman game written in Python. You guess letters to reveal a secret word chosen based on difficulty.
 
