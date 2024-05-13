@@ -33,24 +33,18 @@ def print_hangman(num_of_tries):
     """
     print(HANGMAN_PHOTOS[num_of_tries])
 
-def show_hidden_word(secret_word, old_letters_guessed):
+def show_hidden_word(secret_word, old_letters_guessed):  # One-liner using list comprehension
     """
     Returns a string representing the hidden word, with letters revealed if they have been guessed correctly.
 
     Parameters:
-    secret_word (str): The word to be guessed.
-    old_letters_guessed (list): A list of letters that have been guessed.
+        secret_word (str): The word to be guessed.
+        old_letters_guessed (list): A list of letters that have been guessed.
 
     Returns:
-    str: The hidden word with correctly guessed letters revealed and other letters replaced with underscores.
+        str: The hidden word with correctly guessed letters revealed and other letters replaced with underscores.
     """
-    hidden_word = ""
-    for letter in secret_word:
-        if letter in old_letters_guessed or letter == " ": # If the letter exist, unblur it, if it a space, show it also
-            hidden_word += letter + " "
-        else:
-            hidden_word += "_ " # If the letter is not exist, blur it.
-    return hidden_word.strip()   # Return the hidden word with correctly guessed letters revealed and other letters replaced with underscores
+    return " ".join([letter if letter in old_letters_guessed or letter == " " else "_" for letter in secret_word]).strip()
 
 def check_win(secret_word, old_letters_guessed):
     """
@@ -63,11 +57,9 @@ def check_win(secret_word, old_letters_guessed):
     Returns:
         bool: True if all the letters in the secret_word have been guessed correctly, False otherwise.
     """
-    for letter in secret_word:
-        if letter.lower() not in old_letters_guessed and letter != " ": # also check for spaces
-            return False
-    return True  # Return True if all the letters in the secret_word (excluding spaces) have been guessed correctly, otherwise return False
-    
+    return all(letter.lower() in old_letters_guessed for letter in secret_word if letter != " ")  # No import needed for all
+
+
     
 def check_valid_input(letter_guessed, old_letters_guessed):
     """
