@@ -2,13 +2,13 @@
 
 This is a classic Hangman game written in Python. You guess letters to reveal a secret word chosen based on difficulty.
 
-Features:
+## Features:
 
     Difficulty Levels: Choose from Easy, Medium, or Hard difficulties with words tailored to each level. (Words are stored in a separate file words.txt)
     Visual Hangman: See a visual representation of the hangman as you make incorrect guesses.
     Clear Gameplay: The game guides you through each step, displaying the hidden word with revealed letters and unguessed letters replaced by underscores.
 
-How to Play:
+## How to Play:
 
     Run the Game:
 
@@ -16,13 +16,13 @@ How to Play:
 
         Open a terminal or command prompt and navigate to the directory containing the files.
 
-Run the game using the following command:
+## Run the game using the following command:
          
          
         Bash >> python source.py
 
 
-Choose Difficulty:
+## Choose Difficulty:
 
         The game will prompt you to enter the file path for words.txt. Ensure the path is correct.
         Select a difficulty level (1: Easy, 2: Medium, 3: Hard).
@@ -38,13 +38,13 @@ Choose Difficulty:
             Guess all the letters in the word correctly (You Win!).
             Run out of tries (MAX_TRIES) (You Lose!).
 
-Customizing Words:
+## Customizing Words:
 
     You can customize the words used in the game by editing the words.txt file.
     The file format uses the pipe symbol ("|") to separate difficulty levels and commas (",") to separate words within each level.
     For example:
 
-hat,sun,dog,cat,car|flower,rainbow,butterfly,mountain,river|knowledge,philosophy,beautiful,comfortable,technology,communication
+### hat,sun,dog,cat,car|flower,rainbow,butterfly,mountain,river|knowledge,philosophy,beautiful,comfortable,technology,communication
 
 This file defines three difficulty levels: Easy, Medium, and Hard, with corresponding word lists.
 
