@@ -57,7 +57,7 @@ def check_win(secret_word, old_letters_guessed):
     Returns:
         bool: True if all the letters in the secret_word have been guessed correctly, False otherwise.
     """
-    return all(letter.lower() in old_letters_guessed for letter in secret_word if letter != " ")  # No import needed for all
+    return all(letter.lower() in old_letters_guessed for letter in secret_word if letter != " ")  
 
 
     
@@ -172,11 +172,11 @@ def main():
     while not os.path.isfile(path):
         path = input("Invalid file path. Please enter a valid file path: ")
         
-    difficulty = int(input("Choose difficulty level (1: Easy, 2: Medium, 3: Hard): "))
-    while difficulty not in [1, 2, 3]:
-        difficulty = int(input("Invalid difficulty level. Please choose 1, 2, or 3: "))
+    difficulty = str(input("Choose difficulty level (1: Easy, 2: Medium, 3: Hard): "))
+    while difficulty not in ["1", "2", "3"]:
+        difficulty = str(input("Invalid difficulty level. Please choose 1, 2, or 3: "))
         
-    SAVED_WORD = choose_word(path, difficulty)
+    SAVED_WORD = choose_word(path, int(difficulty))
     
     # Main game loop
     while num_of_tries < MAX_TRIES:
