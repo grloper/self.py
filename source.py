@@ -167,28 +167,28 @@ def main():
     old_letters_guessed = []
     num_of_tries = 0
     
-    # Handle the input of the secret word and the difficulty level
+    # Handle the input validation of the path 
     path = input("\nEnter file path: ")
     while not os.path.isfile(path):
         path = input("Invalid file path. Please enter a valid file path: ")
-        
+    # Handle the input validation of the difficulty level    
     difficulty = str(input("Choose difficulty level (1: Easy, 2: Medium, 3: Hard): "))
     while difficulty not in ["1", "2", "3"]:
         difficulty = str(input("Invalid difficulty level. Please choose 1, 2, or 3: "))
         
-    SAVED_WORD = choose_word(path, int(difficulty))
+    SAVED_WORD = choose_word(path, int(difficulty)) # Call choose_word to roll a random word from the difficulty level
     
     # Main game loop
     while num_of_tries < MAX_TRIES:
-        print_hangman(num_of_tries)
-        print(show_hidden_word(SAVED_WORD, old_letters_guessed))
-        letter_guessed = input("\nGuess a letter: ").lower()
-        if not try_update_letter_guessed(letter_guessed, old_letters_guessed):
-            continue
-        if letter_guessed not in SAVED_WORD:
+        print_hangman(num_of_tries) # Print current game state using the hashmap
+        print(show_hidden_word(SAVED_WORD, old_letters_guessed)) # Call show_hidden_word to print the player progress
+        letter_guessed = input("\nGuess a letter: ").lower() # Take input from user
+        if not try_update_letter_guessed(letter_guessed, old_letters_guessed): # Call try_update_letter_guessed to check for valid input and handle edge cases
+            continue # Go to the next loop and re-input
+        if letter_guessed not in SAVED_WORD: # If guessed wrong increase the num_of_tries
             num_of_tries += 1
-        if check_win(SAVED_WORD, old_letters_guessed):
-            print("\n",show_hidden_word(SAVED_WORD, old_letters_guessed))
+        if check_win(SAVED_WORD, old_letters_guessed): # Call check_win to see if the player has won
+            print("\n",show_hidden_word(SAVED_WORD, old_letters_guessed)) # Call show_hidden_word to print the player progress
             print("You won!")
             break
     # Check if the player has lost
