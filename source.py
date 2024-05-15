@@ -152,7 +152,70 @@ def print_welcome_screen():
     clear_screen()
     print("Welcome to the Hangman game!")
     print(HANGMAN_GAME_LOGO)
-     
+def validate_file_path(prompt="Enter file path: "):
+  """
+  Prompts the user for a valid file path and returns it.
+
+  Args:
+      prompt (str, optional): The message to display when prompting the user.
+          Defaults to "Enter file path: ".
+
+  Returns:
+      str: The valid file path entered by the user.
+  """
+
+  while True:
+    path = input(prompt)
+    if os.path.isfile(path):
+      return path
+    else:
+      print("Invalid file path. Please enter a valid file path:")
+
+def validate_difficulty(prompt="Choose difficulty level (1: Easy, 2: Medium, 3: Hard): "):
+  """
+  Prompts the user for a valid difficulty level and returns it.
+
+  Args:
+      prompt (str, optional): The message to display when prompting the user.
+          Defaults to "Choose difficulty level (1: Easy, 2: Medium, 3: Hard): ".
+
+  Returns:
+      str: The valid difficulty level (1, 2, or 3) entered by the user.
+  """
+
+  valid_options = ["1", "2", "3"]
+  while True:
+    difficulty = str(input(prompt))
+    if difficulty in valid_options:
+      return difficulty
+    else:
+      print("Invalid difficulty level. Please choose 1, 2, or 3:")
+
+def check_lose(num_of_tries, saved_word):
+  """
+  Checks if the player has lost in a Hangman game.
+
+  This function takes the current number of tries and the hidden word as input,
+  performs a loss check, and displays messages if the player has lost.
+
+  Args:
+      num_of_tries (int): The current number of tries the player has used.
+      saved_word (str): The hidden word the player is trying to guess.
+
+  Prints:
+      Loss messages ("You lost!", "Hidden word:") and reveals the hidden word
+      if the player has lost. Calls the `print_hangman` function to display the hangman state.
+
+  Returns:
+      None
+  """
+
+  if num_of_tries == MAX_TRIES: # if the player reached MAX_TRIES, we then know he has lost
+    print_hangman(num_of_tries)  # print the current state
+    print("You lost!") # L
+    print("Hidden word:", saved_word)
+
+    
 def main():
     """
     The main function of the Hangman game
@@ -167,35 +230,31 @@ def main():
     old_letters_guessed = []
     num_of_tries = 0
     
-    # Handle the input validation of the path 
-    path = input("\nEnter file path: ")
-    while not os.path.isfile(path):
-        path = input("Invalid file path. Please enter a valid file path: ")
-    # Handle the input validation of the difficulty level    
-    difficulty = str(input("Choose difficulty level (1: Easy, 2: Medium, 3: Hard): "))
-    while difficulty not in ["1", "2", "3"]:
-        difficulty = str(input("Invalid difficulty level. Please choose 1, 2, or 3: "))
+    # Getting valid input from user
+    path = validate_file_path()
+    difficulty = validate_difficulty()
         
     SAVED_WORD = choose_word(path, int(difficulty)) # Call choose_word to roll a random word from the difficulty level
+    print_welcome_screen() # Clear the screen 
     
     # Main game loop
     while num_of_tries < MAX_TRIES:
         print_hangman(num_of_tries) # Print current game state using the hashmap
         print(show_hidden_word(SAVED_WORD, old_letters_guessed)) # Call show_hidden_word to print the player progress
+        
         letter_guessed = input("\nGuess a letter: ").lower() # Take input from user
         if not try_update_letter_guessed(letter_guessed, old_letters_guessed): # Call try_update_letter_guessed to check for valid input and handle edge cases
             continue # Go to the next loop and re-input
-        if letter_guessed not in SAVED_WORD: # If guessed wrong increase the num_of_tries
+        
+        if letter_guessed not in SAVED_WORD: # If letter_guessed is wrong increase the num_of_tries
             num_of_tries += 1
+            
         if check_win(SAVED_WORD, old_letters_guessed): # Call check_win to see if the player has won
             print("\n",show_hidden_word(SAVED_WORD, old_letters_guessed)) # Call show_hidden_word to print the player progress
-            print("You won!")
+            print("You won!") # W
             break
-    # Check if the player has lost
-    if num_of_tries == MAX_TRIES:
-        print_hangman(num_of_tries)
-        print("You lost!")
-        print("Hidden word:", SAVED_WORD)
+    # End of main game loop
+    check_lose(num_of_tries, SAVED_WORD)
 
 
 if __name__ == "__main__":
